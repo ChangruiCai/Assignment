@@ -103,7 +103,7 @@ for c=2:Nsteps
             J(ind,ind) = J(ind,ind) + dJ;
         end
         
-        .
+        
         for k = 2:N-1
             xkm1 = q(2*k-3);
             ykm1 = q(2*k-2);
@@ -151,8 +151,8 @@ end
 %% Plotting
 timeArray = (0:Nsteps-1) * dt;
 
-% Q1:
-figure(2); % Maximum vertical displacement
+
+figure(1); % Maximum vertical displacement
 plot(timeArray, Y_max, 'r-','LineWidth',1.5);
 xlabel('t (sec)');
 ylabel('y_{max} (meter)');
@@ -169,19 +169,23 @@ yy_max(i) = y_max;
 
 end
 
-% Q2:
-figure(3); % P vs. y_max
-grid on;
+
+
+% Plot terminal velocity vs. load
+loads = [2000, 4000, 6000, 8000, 10000, 12000, 14000, 16000, 18000, 20000];
+simulated_tv = [-0.037109, -0.072407, -0.104565, -0.132934, -0.157442, -0.178374, -0.196169, -0.211299, -0.224202, -0.235256];
+theoretical_tv = [-0.038045, -0.07609, -0.114135, -0.15218, -0.190225, -0.228269, -0.266314, -0.304359, -0.342404, -0.380449];
+
+figure(2)
+plot(loads, simulated_tv, 'bo-', 'Color', 'b', 'DisplayName', 'Simulation');
 hold on;
-plot( PP0, YY_max, 'ro-','LineWidth',1.5); % plot Simulation results
-plot( PP0, yy_max, 'b*-','LineWidth',1.5); % plot Theory results
-legend('Simulation Results','Theory Results')
-xlabel('P (Newton)');
-ylabel('y_{max} (meter)');
-% title('Simulation and theory difference');
-
-
-
+plot(loads, theoretical_tv, 'ro-', 'Color', 'r', 'DisplayName', 'Beam Theory');
+xlabel('Load [N]');
+ylabel('Terminal Velocity [m/s]');
+title('Terminal Velocity vs. Load');
+grid on;
+legend show;
+saveas(gcf, 'termv_vs_load.png');
 
 %% Copyright M. Khalid Jawed (khalidjm@seas.ucla.edu)
 % You should use this code at your own risk. Copy and redistribution is not
@@ -398,4 +402,3 @@ J = [J11 J12 J13 J14;
 J = 0.5 * EA * l_k * J;
 
 end
-
