@@ -20,21 +20,22 @@ noise = 0.001 * np.random.normal(0, 0.1, size=x_real.shape)
 # Add Gaussian noise
 y_real = n_true * np.exp(-a_true * (m_true * x_real + b_true) ** 2) + noise
 
-
+#define loss
 def loss(y, y_pred):
     return np.mean((y - y_pred) ** 2)
 
-
+#define slope
 def grad_m(y, y_pred, x):
     return -2 * np.mean(x * (y - y_pred))
 
-
+#define intercept
 def grad_b(y, y_pred):
     return -2 * np.mean(y - y_pred)
 
 
 
 def linear(epochs, lr):
+    #seed
     m = np.random.rand()
     b = np.random.rand()
 
@@ -49,18 +50,17 @@ def linear(epochs, lr):
         m -= lr * dm
         b -= lr * db
 
-        if epoch % 100 == 0:
-            print(f'Epoch:{epoch}, Loss:{loss_value}')
-
+        
+    
     y_pred = m * x_real + b
     plt.figure()
-    plt.plot(x_real, y_real, alpha=0.5, label='Actual Data(Noisy)')
-    plt.plot(x_real, y_pred, 'r--', label='Predicted Data(Linear)')
+    plt.plot(x_real, y_real, alpha=0.5, label='Actual Data')
+    plt.plot(x_real, y_pred, 'r--', label='Predicted Data')
     plt.xlabel('x')
     plt.ylabel('y')
     plt.title('Linear Model')
     plt.legend()
     plt.show()
 
-
+print(f'Epoch:{epoch}, Loss:{loss_value}')
 linear(10000, 0.001)
