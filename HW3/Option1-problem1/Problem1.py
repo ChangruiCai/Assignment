@@ -62,5 +62,5 @@ def linear_fit(epochs, lr):
     plt.legend()
     plt.show()
 
-if __name__ == "__main__":
-    linear_fit(10000, 0.001)
+
+linear_fit(10000, 0.001)
