@@ -54,7 +54,7 @@ def linear(epochs, lr):
     
     y_pred = m * x_real + b
     plt.figure()
-    plt.plot(x_real, y_real, alpha=0.5, label='Actual Data')
+    plt.plot(x_real, y_real, label='Actual Data')
     plt.plot(x_real, y_pred, 'r--', label='Predicted Data')
     plt.xlabel('x')
     plt.ylabel('y')
