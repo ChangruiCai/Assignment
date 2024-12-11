@@ -25,16 +25,16 @@ def loss(y, y_pred):
     return np.mean((y - y_pred) ** 2)
 
 
-def grad_m_linear(y, y_pred, x):
+def grad_m(y, y_pred, x):
     return -2 * np.mean(x * (y - y_pred))
 
 
-def grad_b_linear(y, y_pred):
+def grad_b(y, y_pred):
     return -2 * np.mean(y - y_pred)
 
 
 
-def linear_fit(epochs, lr):
+def linear(epochs, lr):
     m = np.random.rand()
     b = np.random.rand()
 
@@ -43,8 +43,8 @@ def linear_fit(epochs, lr):
 
         loss_value = loss(y_real, y_pred)
 
-        dm = grad_m_linear(y_real, y_pred, x_real)
-        db = grad_b_linear(y_real, y_pred)
+        dm = grad_m(y_real, y_pred, x_real)
+        db = grad_b(y_real, y_pred)
 
         m -= lr * dm
         b -= lr * db
@@ -63,4 +63,4 @@ def linear_fit(epochs, lr):
     plt.show()
 
 
-linear_fit(10000, 0.001)
+linear(10000, 0.001)
