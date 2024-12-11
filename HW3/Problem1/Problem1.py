@@ -58,7 +58,7 @@ def linear(epochs, lr):
     plt.plot(x_real, y_pred, 'r--', label='Predicted Data(Linear)')
     plt.xlabel('x')
     plt.ylabel('y')
-    plt.title('Comparison of Actual Data and Predicted Data - Linear Model')
+    plt.title('Linear Model')
     plt.legend()
     plt.show()
 
